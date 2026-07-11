@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+:root {
+  /* Brand Colors */
+  --color-primary: #7FA652;
+  --color-primary-dark: #6E9545;
+
+  /* Neutral Colors */
+  --color-text: #1F2937;
+  --color-text-light: #6B7280;
+
+  /* Backgrounds */
+  --color-background: #FFFFFF;
+  --color-section: #F6FAF4;
+
+  /* Borders */
+  --color-border: #DAE0D2;
+}
+
+html {
+  scroll-behavior: smooth;
+}
