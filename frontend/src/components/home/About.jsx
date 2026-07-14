@@ -15,11 +15,11 @@ function About() {
       <Container>
         <div className="max-w-4xl mx-auto text-center">
 
-          <span className="text-[var(--color-primary)] font-semibold uppercase tracking-[0.2em]">
+          <span className="text-[var(--color-primary)] font-bold uppercase tracking-[0.2em]">
             About ICHRO Software
           </span>
 
-          <h2 className="mt-4 text-4xl lg:text-5xl font-bold text-[var(--color-text)] leading-tight">
+          <h2 className="mt-4 text-4xl lg:text-5xl font-semibold text-[var(--color-text)] leading-tight">
             Business Process & Technology
             <br />
             Management Solutions

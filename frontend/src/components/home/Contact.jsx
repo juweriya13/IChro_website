@@ -1,123 +1,119 @@
 import Container from "../layout/Container";
+import {
+  MapPin,
+  Phone,
+  Mail,
+  Globe,
+  Clock,
+} from "lucide-react";
 
 function Contact() {
   return (
-    <section id="contact" className="py-20 bg-[var(--color-section)]">
+    <section
+      id="contact"
+      className="py-24 bg-white">
       <Container>
-        <div className="text-center mb-14">
-          <span className="text-[var(--color-primary)] font-semibold uppercase tracking-widest">
+
+        <div className="text-center max-w-3xl mx-auto">
+
+          <span className="text-[var(--color-primary)] uppercase tracking-[0.2em] font-semibold">
             Contact Us
           </span>
 
-          <h2 className="mt-3 text-4xl font-bold text-[var(--color-text)]">
-            Let's Start a Conversation
-          </h2>
+          <h2 className="mt-4 text-4xl lg:text-5xl font-bold text-[var(--color-text)]">
+            We'd Love To Hear From You</h2>
 
-          <p className="mt-4 text-gray-600">
-            We'd love to hear from you. Get in touch with our team for any
-            business or technology requirements.
-          </p>
+          <p className="mt-6 text-lg text-gray-600 leading-8">
+            Get in touch with ICHRO Software for business inquiries,
+            HR solutions, software services, and technology consulting.</p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
+        <div className="mt-16 max-w-4xl mx-auto bg-[var(--color-section)] rounded-3xl border border-[var(--color-border)] p-10">
+          <div className="grid md:grid-cols-2 gap-10">
+            <div className="flex gap-4">
 
-          {/* Contact Information */}
-
-          <div className="bg-white rounded-2xl p-8 shadow-sm">
-
-            <h3 className="text-2xl font-bold mb-8">
-              Contact Information
-            </h3>
-
-            <div className="space-y-6">
-
+              <MapPin
+                className="text-[var(--color-primary)] mt-1" size={26}/>
               <div>
-                <h4 className="font-semibold text-[var(--color-primary)]">
-                  Address
-                </h4>
 
-                <p className="text-gray-600">
-                  Nagpur, Maharashtra, India
-                </p>
+                <h3 className="font-semibold text-xl">
+                  Office Address</h3>
+
+                <p className="mt-2 text-gray-600">
+                  Nagpur, Maharashtra, India </p>
+
               </div>
+            </div>
+            <div className="flex gap-4">
+
+              <Phone
+                className="text-[var(--color-primary)] mt-1" size={26}/>
 
               <div>
-                <h4 className="font-semibold text-[var(--color-primary)]">
-                  Email
-                </h4>
 
-                <p className="text-gray-600">
-                  ichrosoftware@gmail.com
-                </p>
+                <h3 className="font-semibold text-xl">
+                  Phone</h3>
+
+                <p className="mt-2 text-gray-600">
+                  +91 XXXXX XXXXX </p>
+
               </div>
+            </div>
+            <div className="flex gap-4">
+
+              <Mail
+                className="text-[var(--color-primary)] mt-1"
+                size={26} />
 
               <div>
-                <h4 className="font-semibold text-[var(--color-primary)]">
-                  LinkedIn
-                </h4>
+                <h3 className="font-semibold text-xl">
+                  Email </h3>
 
-                <p className="text-gray-600">
-                  ICHRO Software
-                </p>
+                <p className="mt-2 text-gray-600">
+                  info@ichrosoftware.com </p>
+
               </div>
+            </div>
+
+            <div className="flex gap-4">
+
+              <Globe
+                className="text-[var(--color-primary)] mt-1" size={26} />
 
               <div>
-                <h4 className="font-semibold text-[var(--color-primary)]">
-                  Business Hours
-                </h4>
 
-                <p className="text-gray-600">
+                <h3 className="font-semibold text-xl">
+                  Website </h3>
+
+                <p className="mt-2 text-gray-600">
+                  www.ichrosoftware.com </p>
+
+              </div>
+            </div>
+
+            <div className="flex gap-4">
+
+              <Clock
+                className="text-[var(--color-primary)] mt-1" size={26}/>
+              <div>
+
+                <h3 className="font-semibold text-xl">
+                  Business Hours </h3>
+
+                <p className="mt-2 text-gray-600">
                   Monday – Saturday
                   <br />
                   9:30 AM – 6:30 PM
                 </p>
+
               </div>
 
             </div>
 
           </div>
 
-          {/* Contact Form */}
-
-          <div className="bg-white rounded-2xl p-8 shadow-sm">
-
-            <form className="space-y-5">
-
-              <input
-                type="text"
-                placeholder="Full Name"
-                className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:border-[var(--color-primary)]"
-              />
-
-              <input
-                type="email"
-                placeholder="Email Address"
-                className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:border-[var(--color-primary)]"
-              />
-
-              <input
-                type="text"
-                placeholder="Phone Number"
-                className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:border-[var(--color-primary)]"
-              />
-
-              <textarea
-                rows="5"
-                placeholder="Your Message"
-                className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:border-[var(--color-primary)]"
-              ></textarea>
-
-              <button
-                className="bg-[var(--color-primary)] hover:bg-[var(--color-primary-dark)] text-white px-8 py-3 rounded-xl transition"
-              >
-                Send Message
-              </button>
-
-            </form>
-
-          </div>
-
         </div>
+
       </Container>
     </section>
   );
