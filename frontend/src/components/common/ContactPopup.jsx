@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import api from "../../services/api";
 
 function ContactPopup({ isOpen, onClose }) {
   const [formData, setFormData] = useState({
@@ -9,6 +10,7 @@ function ContactPopup({ isOpen, onClose }) {
   });
 
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (isOpen) {
@@ -67,16 +69,17 @@ function ContactPopup({ isOpen, onClose }) {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    if (!validate()) return;
+  if (!validate()) return;
 
-    console.log(formData);
+  try {
+    setLoading(true);
 
-    alert("Thank you! Our team will contact you shortly.");
+    const response = await api.post("/contact/", formData);
 
-    closePopup();
+    alert(response.data.message);
 
     setFormData({
       name: "",
@@ -84,7 +87,20 @@ function ContactPopup({ isOpen, onClose }) {
       email: "",
       requirement: "",
     });
-  };
+
+    closePopup();
+  } catch (error) {
+    console.error(error);
+
+    if (error.response) {
+      alert("Submission failed. Please check your details.");
+    } else {
+      alert("Unable to connect to the server.");
+    }
+  } finally {
+    setLoading(false);
+  }
+};
 
   if (!isOpen) return null;
 
@@ -247,9 +263,10 @@ function ContactPopup({ isOpen, onClose }) {
 
               <button
                 type="submit"
-                className="w-full bg-[var(--color-primary)] hover:bg-[var(--color-primary-dark)] text-white py-3 rounded-lg font-semibold transition duration-300"
-              >
-                Submit
+                disabled={loading}
+                className="w-full bg-[var(--color-primary)] hover:bg-[var(--color-primary-dark)] text-white py-3 rounded-lg font-semibold transition duration-300 disabled:opacity-60 disabled:cursor-not-allowed"
+                >
+                {loading ? "Submitting..." : "Submit"}
               </button>
 
               </form>

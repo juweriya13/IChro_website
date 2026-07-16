@@ -15,10 +15,7 @@ class Contact(models.Model):
         null=True,
     )
 
-    requirement = models.TextField(
-        blank=True,
-        null=True,
-    )
+    requirement = models.TextField()
 
     created_at = models.DateTimeField(
         auto_now_add=True,

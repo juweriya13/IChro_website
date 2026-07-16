@@ -14,7 +14,7 @@ function Home() {
   useEffect(() => {
   const timer = setTimeout(() => {
     setIsPopupOpen(true);
-  }, 30000);
+  }, 10000);
 
   return () => clearTimeout(timer);
 }, []);
