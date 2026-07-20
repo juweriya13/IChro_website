@@ -4,7 +4,29 @@ from rest_framework.views import APIView
 
 from .models import Contact
 from .serializers import ContactSerializer
+from rest_framework import generics
+from rest_framework.permissions import IsAdminUser
 
+
+class ContactListAPIView(generics.ListAPIView):
+    """
+    Returns all contact enquiries.
+    Only staff/admin users can access this endpoint.
+    """
+
+    queryset = Contact.objects.order_by("-created_at")
+    serializer_class = ContactSerializer
+    permission_classes = [IsAdminUser]
+
+class ContactDeleteAPIView(generics.DestroyAPIView):
+    """
+    Delete a contact enquiry.
+    Only staff/admin users can delete enquiries.
+    """
+
+    queryset = Contact.objects.all()
+    serializer_class = ContactSerializer
+    permission_classes = [IsAdminUser]
 
 class ContactCreateAPIView(APIView):
     """

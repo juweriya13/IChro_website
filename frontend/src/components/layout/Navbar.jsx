@@ -1,13 +1,14 @@
 import Container from "./Container";
 import logo from "../../assets/logo/logo.png";
+import { Link } from "react-router-dom";
 
 function Navbar({ onContactClick }) {
   const navLinks = [
-    { name: "Home", href: "#home" },
-    { name: "About", href: "#about" },
-    { name: "Services", href: "#services" },
-    { name: "Contact", href: "#contact" },
-  ];
+  { name: "Home", path: "/" },
+  { name: "About", path: "/about" },
+  { name: "Services", path: "/services" },
+  { name: "Careers", path: "/careers" },
+];
 
   return (
     <nav className="bg-white shadow-sm sticky top-0 z-50">
@@ -33,13 +34,13 @@ function Navbar({ onContactClick }) {
             {/* Navigation */}
             <div className="flex items-center gap-6">
               {navLinks.map((link) => (
-                <a
+                <Link
                   key={link.name}
-                  href={link.href}
+                  to={link.path}
                   className="text-gray-700 font-medium hover:text-[var(--color-primary)] transition-colors duration-200"
                 >
                   {link.name}
-                </a>
+                </Link>
               ))}
             </div>
 
