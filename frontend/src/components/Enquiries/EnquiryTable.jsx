@@ -76,12 +76,18 @@ function EnquiryTable({ enquiries, onView, onComplete }) {
                     {/* Mark as Completed */}
                     {enquiry.status !== "completed" && (
                       <button
-                        onClick={() => onComplete(enquiry.id)}
-                        className="rounded-lg p-2 text-green-600 hover:bg-green-100 transition"
-                        title="Mark as Completed"
-                      >
-                        <FiCheck size={18} />
-                      </button>
+                      onClick={() => onComplete(enquiry.id)}
+                      disabled={enquiry.status === "completed"}
+                      className={`px-3 py-1 rounded-lg text-sm font-medium transition ${
+                        enquiry.status === "completed"
+                          ? "bg-green-100 text-green-700 cursor-not-allowed"
+                          : "bg-blue-600 text-white hover:bg-blue-700"
+                      }`}
+                    >
+                      {enquiry.status === "completed"
+                        ? "Completed"
+                        : "Mark Completed"}
+                    </button>
                     )}
                   </div>
                 </td>
