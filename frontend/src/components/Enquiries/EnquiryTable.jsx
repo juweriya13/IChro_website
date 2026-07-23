@@ -1,6 +1,6 @@
 import { FiEye, FiTrash2 } from "react-icons/fi";
 
-function EnquiryTable({ enquiries }) {
+function EnquiryTable({ enquiries, OnView, onDelete }) {
   return (
     <div className="overflow-x-auto rounded-xl border border-gray-200">
       <table className="min-w-full">
@@ -45,11 +45,12 @@ function EnquiryTable({ enquiries }) {
               <td className="px-5 py-4">
                 <div className="flex justify-center gap-2">
                   <button
-  className="rounded-lg p-2 text-blue-600 hover:bg-blue-100 transition"
-  title="View"
+    onClick={() => onView(enquiry)}
+    className="rounded-lg p-2 text-blue-600 hover:bg-blue-100 transition"
+    title="View"
 >
     <FiEye size={18} />
-    </button>
+</button>
 
     <button
     className="rounded-lg p-2 text-red-600 hover:bg-red-100 transition"

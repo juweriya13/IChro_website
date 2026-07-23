@@ -23,7 +23,7 @@ function Navbar({ onContactClick }) {
               className="h-12 w-12 object-contain"
             />
 
-            <h1 className="text-2xl font-bold tracking-wide text-[var(--color-text)]">
+            <h1 className="text-2xl font-bold tracking-wide text-[var(--color-heading)]">
               ICHRO SOFTWARE
             </h1>
           </div>
@@ -37,7 +37,7 @@ function Navbar({ onContactClick }) {
                 <Link
                   key={link.name}
                   to={link.path}
-                  className="text-gray-700 font-medium hover:text-[var(--color-primary)] transition-colors duration-200"
+                  className="text-[var(--color-heading)] font-medium hover:text-[var(--color-primary)] transition-colors duration-300"
                 >
                   {link.name}
                 </Link>
@@ -47,7 +47,7 @@ function Navbar({ onContactClick }) {
             {/* Button */}
             <button
               onClick={onContactClick}
-              className="bg-[var(--color-primary)] text-white px-5 py-2.5 rounded-lg font-medium hover:bg-[var(--color-primary-dark)] transition-all duration-300"
+             className="bg-[var(--color-primary)] text-white px-6 py-3 rounded-lg font-medium hover:bg-[var(--color-primary-dark)] transition duration-300 shadow-sm"
             >
               Get in Touch
             </button>

@@ -1,36 +1,85 @@
 @import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap");
+
+/* ==========================================
+   ROOT VARIABLES
+========================================== */
 
 :root {
-  /* Brand Colors */
+
   --color-primary: #7FA652;
   --color-primary-dark: #6E9545;
+  --color-primary-light: #EEF7E7;
 
-  /* Neutral Colors */
-  --color-text: #1F2937;
+  --color-heading: #1F2937;
+  --color-text: #4B5563;
   --color-text-light: #6B7280;
 
-  /* Backgrounds */
   --color-background: #FFFFFF;
   --color-section: #F6FAF4;
 
-  /* Borders */
   --color-border: #DAE0D2;
+
 }
 
-html {
-  scroll-behavior: smooth;
+/* ==========================================
+   RESET
+========================================== */
+
+*,
+*::before,
+*::after{
+
+  box-sizing:border-box;
+
 }
 
-@keyframes popup {
+html{
+
+  scroll-behavior:smooth;
+
+}
+
+body{
+
+  font-family:"Inter",sans-serif;
+
+  background:var(--color-background);
+
+  color:var(--color-text);
+
+  overflow-x:hidden;
+
+}
+
+img{
+
+  display:block;
+
+  max-width:100%;
+
+}
+
+/* ==========================================
+   ANIMATION
+========================================== */
+
+@keyframes popup{
 
   from{
-      opacity:0;
-      transform:scale(.92);
+
+    opacity:0;
+
+    transform:scale(.92);
+
   }
 
   to{
-      opacity:1;
-      transform:scale(1);
+
+    opacity:1;
+
+    transform:scale(1);
+
   }
 
 }
