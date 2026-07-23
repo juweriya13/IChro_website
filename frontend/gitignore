@@ -1,25 +1,46 @@
-# Python Virtual Environment
-Ichro-env/
-.venv/
-
+# ===========================
 # Python
+# ===========================
 __pycache__/
 *.py[cod]
 *.pyo
+*.sqlite3
 
-# Django
-db.sqlite3
+# ===========================
+# Virtual Environments
+# ===========================
+Ichro-env/
+venv/
+env/
+.venv/
+
+# ===========================
+# Environment Variables
+# ===========================
 .env
+
+# ===========================
+# Django
+# ===========================
+db.sqlite3
 media/
 staticfiles/
 
+# ===========================
 # React
+# ===========================
+node_modules/
+dist/
 frontend/node_modules/
 frontend/dist/
 
+# ===========================
 # VS Code
+# ===========================
 .vscode/
 
+# ===========================
 # OS Files
+# ===========================
 .DS_Store
 Thumbs.db

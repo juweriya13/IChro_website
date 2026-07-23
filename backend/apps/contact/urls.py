@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import (
     ContactAPIView,
-    ContactDeleteAPIView,
+    ContactStatusUpdateAPIView,
     ContactDetailAPIView,
 )
 
@@ -10,5 +10,6 @@ urlpatterns = [
 
     path("detail/<int:pk>/", ContactDetailAPIView.as_view(), name="contact-detail"),
 
-    path("<int:pk>/", ContactDeleteAPIView.as_view(), name="contact-delete"),
+path(
+    "<int:pk>/status/", ContactStatusUpdateAPIView.as_view(), name="contact-status",),
 ]

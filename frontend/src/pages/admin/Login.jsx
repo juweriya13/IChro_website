@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { login } from "../../services/auth";
-import { saveTokens } from "../../utils/token";
 
 function Login() {
   const navigate = useNavigate();
@@ -24,34 +23,31 @@ function Login() {
     setError("");
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+ const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    setLoading(true);
+  setLoading(true);
 
-    try {
-      const response = await login(formData);
+  try {
 
-      saveTokens(
-        response.access,
-        response.refresh
-      );
+    await login(formData);
 
-      navigate("/admin");
+    navigate("/admin/dashboard");
 
-    } catch (err) {
+  } catch (err) {
 
-      setError(
-        err.response?.data?.non_field_errors?.[0] ||
-        "Login failed."
-      );
+    setError(
+      err.response?.data?.detail ||
+      err.response?.data?.non_field_errors?.[0] ||
+      "Unable to sign in. Please try again."
+    );
 
-    } finally {
+  } finally {
 
-      setLoading(false);
+    setLoading(false);
 
-    }
-  };
+  }
+};
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center">
@@ -73,7 +69,8 @@ function Login() {
             placeholder="Username"
             value={formData.username}
             onChange={handleChange}
-            className="w-full border rounded-lg p-3"
+            required
+            className="w-full border rounded-lg p-3 focus:ring-2 focus:ring-blue-500 outline-none"
           />
 
           <input
@@ -82,7 +79,8 @@ function Login() {
             placeholder="Password"
             value={formData.password}
             onChange={handleChange}
-            className="w-full border rounded-lg p-3"
+            required
+            className="w-full border rounded-lg p-3 focus:ring-2 focus:ring-blue-500 outline-none"
           />
 
           {error && (
@@ -94,9 +92,9 @@ function Login() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-blue-600 text-white py-3 rounded-lg"
+            className="w-full bg-blue-600 hover:bg-blue-700 transition text-white py-3 rounded-lg disabled:opacity-50"
           >
-            {loading ? "Logging in..." : "Login"}
+            {loading ? "Signing In..." : "Login"}
           </button>
 
         </form>

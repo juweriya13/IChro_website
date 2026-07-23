@@ -11,5 +11,6 @@ class ContactSerializer(serializers.ModelSerializer):
             "phone",
             "email",
             "requirement",
+            "status",
             "created_at",
         ]

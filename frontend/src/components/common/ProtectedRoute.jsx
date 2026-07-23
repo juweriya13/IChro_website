@@ -1,11 +1,22 @@
 import { Navigate } from "react-router-dom";
-import { getAccessToken } from "../../utils/token";
+
+import {
+  getAccessToken,
+  getRefreshToken,
+} from "../../utils/token";
 
 function ProtectedRoute({ children }) {
-  const token = getAccessToken();
 
-  if (!token) {
-    return <Navigate to="/admin/login" replace />;
+  const accessToken = getAccessToken();
+  const refreshToken = getRefreshToken();
+
+  if (!accessToken && !refreshToken) {
+    return (
+      <Navigate
+        to="/admin/login"
+        replace
+      />
+    );
   }
 
   return children;

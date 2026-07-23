@@ -1,10 +1,15 @@
 from django.db import models
 
-# Create your models here.
+
 class Contact(models.Model):
     """
     Stores enquiries submitted from the website.
     """
+
+    STATUS_CHOICES = [
+        ("pending", "Pending"),
+        ("completed", "Completed"),
+    ]
 
     name = models.CharField(max_length=100)
 
@@ -16,6 +21,12 @@ class Contact(models.Model):
     )
 
     requirement = models.TextField()
+
+    status = models.CharField(
+        max_length=20,
+        choices=STATUS_CHOICES,
+        default="pending",
+    )
 
     created_at = models.DateTimeField(
         auto_now_add=True,

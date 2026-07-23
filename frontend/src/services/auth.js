@@ -1,4 +1,5 @@
 import api from "./api";
+
 import {
   saveTokens,
   clearTokens,
@@ -9,9 +10,15 @@ import {
  * Login
  */
 export const login = async (credentials) => {
-  const { data } = await api.post("/auth/login/", credentials);
+  const { data } = await api.post(
+    "/auth/login/",
+    credentials
+  );
 
-  saveTokens(data.access, data.refresh);
+  saveTokens(
+    data.access,
+    data.refresh
+  );
 
   return data;
 };
@@ -20,13 +27,24 @@ export const login = async (credentials) => {
  * Refresh Access Token
  */
 export const refreshAccessToken = async () => {
+
   const refresh = getRefreshToken();
 
-  const { data } = await api.post("/auth/refresh/", {
-    refresh,
-  });
+  if (!refresh) {
+    throw new Error("Refresh token missing.");
+  }
 
-  saveTokens(data.access, data.refresh ?? refresh);
+  const { data } = await api.post(
+    "/auth/refresh/",
+    {
+      refresh,
+    }
+  );
+
+  saveTokens(
+    data.access,
+    data.refresh || refresh
+  );
 
   return data.access;
 };
@@ -35,13 +53,22 @@ export const refreshAccessToken = async () => {
  * Logout
  */
 export const logout = async () => {
-  try {
-    await api.post("/auth/logout/", {
-      refresh: getRefreshToken(),
-    });
-  } catch (error) {
-    // Ignore logout errors
-  }
 
-  clearTokens();
+  try {
+
+    const refresh = getRefreshToken();
+
+    if (refresh) {
+
+      await api.post("/auth/logout/", {
+        refresh,
+      });
+
+    }
+
+  } finally {
+
+    clearTokens();
+
+  }
 };

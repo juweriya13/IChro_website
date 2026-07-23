@@ -1,7 +1,10 @@
 import logging
 
 from rest_framework import status
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import (
+    AllowAny,
+    IsAuthenticated,
+)
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -14,14 +17,15 @@ logger = logging.getLogger(__name__)
 
 class LoginAPIView(APIView):
     """
-    Authenticate admin user and return JWT tokens.
+    Authenticate Admin User.
     """
 
-    permission_classes = []
+    permission_classes = [AllowAny]
 
     def post(self, request):
+
         logger.info(
-            "Login attempt for username: %s",
+            "Login attempt: %s",
             request.data.get("username"),
         )
 
@@ -30,7 +34,21 @@ class LoginAPIView(APIView):
 
         user = serializer.validated_data["user"]
 
+        # Allow only admin/staff users
+        if not user.is_staff:
+            return Response(
+                {
+                    "detail": "You are not authorized to access the admin panel."
+                },
+                status=status.HTTP_403_FORBIDDEN,
+            )
+
         refresh = RefreshToken.for_user(user)
+
+        logger.info(
+            "Admin %s logged in successfully.",
+            user.username,
+        )
 
         return Response(
             {
@@ -43,18 +61,33 @@ class LoginAPIView(APIView):
 
 class LogoutAPIView(APIView):
     """
-    Logout user by blacklisting the refresh token.
+    Logout User.
     """
 
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
+
+        refresh_token = request.data.get("refresh")
+
+        if not refresh_token:
+            return Response(
+                {
+                    "detail": "Refresh token is required."
+                },
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
         try:
-            refresh_token = request.data.get("refresh")
 
             token = RefreshToken(refresh_token)
 
             token.blacklist()
+
+            logger.info(
+                "Admin %s logged out.",
+                request.user.username,
+            )
 
             return Response(
                 {
@@ -63,12 +96,11 @@ class LogoutAPIView(APIView):
                 status=status.HTTP_200_OK,
             )
 
-        except Exception as e:
-            logger.error(str(e))
+        except Exception:
 
             return Response(
                 {
-                    "error": "Invalid refresh token."
+                    "detail": "Invalid refresh token."
                 },
                 status=status.HTTP_400_BAD_REQUEST,
             )

@@ -14,16 +14,19 @@ from pathlib import Path
 from datetime import timedelta
 
 SIMPLE_JWT = {
+    # Token Lifetime
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=15),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
 
+    # Security
     "ROTATE_REFRESH_TOKENS": True,
     "BLACKLIST_AFTER_ROTATION": True,
-
     "UPDATE_LAST_LOGIN": True,
 
+    # JWT Header
     "AUTH_HEADER_TYPES": ("Bearer",),
 
+    # Algorithm
     "ALGORITHM": "HS256",
 }
 
@@ -40,7 +43,10 @@ SECRET_KEY = "django-insecure-kbl^z0qrghz_9alf4v=8tx8&1^mn#o&0k&9*n0z23q-p3p+!fh
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "127.0.0.1",
+    "localhost",
+]
 
 
 # Application definition
@@ -173,7 +179,7 @@ REST_FRAMEWORK = {
 
     "DEFAULT_PERMISSION_CLASSES": (
 
-        "rest_framework.permissions.AllowAny",
+        "rest_framework.permissions.IsAuthenticated",
 
     ),
 

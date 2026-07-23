@@ -2,45 +2,57 @@ const ACCESS_TOKEN = "accessToken";
 const REFRESH_TOKEN = "refreshToken";
 
 /**
- * Save JWT Tokens
+ * Save Tokens
  */
 export const saveTokens = (access, refresh) => {
-  sessionStorage.setItem(ACCESS_TOKEN, access);
-  localStorage.setItem(REFRESH_TOKEN, refresh);
+  sessionStorage.setItem(
+    ACCESS_TOKEN,
+    access
+  );
+
+  localStorage.setItem(
+    REFRESH_TOKEN,
+    refresh
+  );
 };
 
 /**
  * Get Access Token
  */
 export const getAccessToken = () => {
-  return sessionStorage.getItem(ACCESS_TOKEN);
+  return sessionStorage.getItem(
+    ACCESS_TOKEN
+  );
 };
 
 /**
  * Get Refresh Token
  */
 export const getRefreshToken = () => {
-  return localStorage.getItem(REFRESH_TOKEN);
+  return localStorage.getItem(
+    REFRESH_TOKEN
+  );
 };
 
 /**
- * Check if user has Access Token
+ * Authentication Status
  */
-export const hasAccessToken = () => {
-  return !!getAccessToken();
+export const isAuthenticated = () => {
+  return !!(
+    getAccessToken() ||
+    getRefreshToken()
+  );
 };
 
 /**
- * Check if user has Refresh Token
- */
-export const hasRefreshToken = () => {
-  return !!getRefreshToken();
-};
-
-/**
- * Clear all tokens
+ * Remove Tokens
  */
 export const clearTokens = () => {
-  sessionStorage.removeItem(ACCESS_TOKEN);
-  localStorage.removeItem(REFRESH_TOKEN);
+  sessionStorage.removeItem(
+    ACCESS_TOKEN
+  );
+
+  localStorage.removeItem(
+    REFRESH_TOKEN
+  );
 };

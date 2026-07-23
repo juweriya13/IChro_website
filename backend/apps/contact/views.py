@@ -17,6 +17,33 @@ class ContactDetailAPIView(generics.RetrieveAPIView):
     serializer_class = ContactSerializer
     permission_classes = [IsAdminUser]
 
+class ContactStatusUpdateAPIView(generics.UpdateAPIView):
+    """
+    Update only the status of a contact enquiry.
+    """
+
+    queryset = Contact.objects.all()
+    serializer_class = ContactSerializer
+    permission_classes = [IsAdminUser]
+    http_method_names = ["patch"]
+
+    def patch(self, request, *args, **kwargs):
+        contact = self.get_object()
+
+        status_value = request.data.get("status")
+
+        if status_value not in ["pending", "completed"]:
+            return Response(
+                {"error": "Invalid status."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        contact.status = status_value
+        contact.save(update_fields=["status"])
+
+        serializer = self.get_serializer(contact)
+
+        return Response(serializer.data)
 
 class ContactAPIView(generics.ListCreateAPIView):
     serializer_class = ContactSerializer
