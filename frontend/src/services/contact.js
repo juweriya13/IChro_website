@@ -8,7 +8,7 @@ export const getContacts = async (params = {}) => {
     params,
   });
 
-  return data;
+  return data.results || [];
 };
 
 /**

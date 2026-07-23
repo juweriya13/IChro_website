@@ -14,16 +14,16 @@ function Enquiries() {
     fetchEnquiries();
   }, []);
 
-  const fetchEnquiries = async () => {
-    try {
-      const data = await getContacts();
-      setEnquiries(data);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  };
+const fetchEnquiries = async () => {
+  try {
+    const data = await getContacts();
+    setEnquiries(data);
+  } catch (error) {
+    console.error(error);
+  } finally {
+    setLoading(false);
+  }
+};
 
   const filteredEnquiries = enquiries.filter((enquiry) => {
   return (
